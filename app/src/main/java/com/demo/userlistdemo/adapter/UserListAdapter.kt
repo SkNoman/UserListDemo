@@ -32,7 +32,7 @@ class UserListAdapter(val activity: Activity): RecyclerView.Adapter<UserListAdap
         val userList = userList?.get(position)
         holder.name.text = userList?.login
         holder.id.text = userList?.id.toString()
-        holder.resposUrl.text = userList?.reposUrl
+        holder.resposUrl.text = userList?.type
 
     }
 

@@ -1,10 +1,12 @@
 package com.demo.userlistdemo
 
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Toast
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -35,22 +37,31 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun initViewModel() {
             val viewModel:MainActivityViewModel = ViewModelProvider(this).get(MainActivityViewModel::class.java)
         viewModel.getLiveDataObserver().observe(this, Observer { userList ->
             if(userList != null) {
-                //recyclerAdapter.setUserList(userList)
-                //recyclerAdapter.notifyDataSetChanged()
-                val languages = resources.getStringArray(R.array.Languages) //list form string file
+                recyclerAdapter.setUserList(userList) //to show the list
+                recyclerAdapter.notifyDataSetChanged() //notify
+                //just remove above two lines
 
-
-
+                val languages = resources.getStringArray(R.array.Languages) //list form string file for test
 
 
                 //cannot use the userlist to the autocomplete text bar
-                //val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, userList)
-                val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, languages)
+               // Toast.makeText(applicationContext, "Id:"+id, Toast.LENGTH_LONG).show()
+                //val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, languages)
+                //problem is the whole list is attatched with the adapter
+
+
+
+                Toast.makeText(this, "Name:"+userList[5].login, Toast.LENGTH_SHORT).show()
+               // Toast.makeText(this, "TotalList"+userList[0].login, Toast.LENGTH_SHORT).show()
+                val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1,userList)
                 autoTextView.setAdapter(adapter)
+
+
             } else {
                 Toast.makeText(this, "Error in getting list", Toast.LENGTH_SHORT).show()
             }

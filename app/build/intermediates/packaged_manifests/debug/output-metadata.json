@@ -4,7 +4,7 @@
     "type": "PACKAGED_MANIFESTS",
     "kind": "Directory"
   },
-  "applicationId": "com.demo.countrylistretrofit",
+  "applicationId": "com.demo.userlistretrofit",
   "variantName": "debug",
   "elements": [
     {

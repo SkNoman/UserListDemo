@@ -4,7 +4,7 @@
     "type": "COMPATIBLE_SCREEN_MANIFEST",
     "kind": "Directory"
   },
-  "applicationId": "com.demo.countrylistretrofit",
+  "applicationId": "com.demo.userlistretrofit",
   "variantName": "debug",
   "elements": []
 }

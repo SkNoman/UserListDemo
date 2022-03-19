@@ -29,6 +29,7 @@ class MainActivityViewModel: ViewModel() {
         call.enqueue(object : Callback<List<UserModel>> {
             override fun onFailure(call: Call<List<UserModel>>, t: Throwable) {
                 liveDataList.postValue(null)
+                //if no response found
             }
 
             override fun onResponse(
@@ -36,9 +37,6 @@ class MainActivityViewModel: ViewModel() {
                 response: Response<List<UserModel>>
             ) {
                 liveDataList.postValue(response.body())
-
-
-
                 }
         })
 
