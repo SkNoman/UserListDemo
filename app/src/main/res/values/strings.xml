@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">UserListDemo</string>
+
+    <string name="image_description">image_description</string>
+    <string name="name">Name</string>
+    <string name="id">Id</string>
+    <string name="link">Link</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="details_view">Details view</string>
+    <string name="not_implemented">Not Implemented</string>
+    <string name="search_id">Search Id:</string>
+
+
+    <string-array name="Languages">
+        <item>Java</item>
+        <item>Kotlin</item>
+        <item>Swift</item>
+        <item>Python</item>
+        <item>Scala</item>
+        <item>Perl</item>
+        <item>Javascript</item>
+        <item>Jquery</item>
+    </string-array>
+</resources>
