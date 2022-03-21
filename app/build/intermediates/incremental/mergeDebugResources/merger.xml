@@ -6584,6 +6584,15 @@
         <item>Perl</item>
         <item>Javascript</item>
         <item>Jquery</item>
+        <item>Bangle</item>
+        <item>English</item>
+        <item>Arabic</item>
+        <item>Spanish</item>
+        <item>Hindi</item>
+        <item>C++</item>
+        <item>C</item>
+        <item>Swift</item>
+
     </string-array></file><file path="C:\Users\Walton\AndroidStudioProjects\UserListDemo\app\src\main\res\values\themes.xml" qualifiers=""><style name="Theme.CountryListRetrofit" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         
         <item name="colorPrimary">@color/purple_500</item>

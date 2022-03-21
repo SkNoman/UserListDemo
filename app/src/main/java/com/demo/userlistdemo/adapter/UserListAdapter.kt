@@ -1,61 +1,72 @@
 package com.demo.userlistdemo.adapter
 
-import android.app.Activity
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
-import com.demo.userlistdemo.R
+import android.widget.ArrayAdapter
+import android.widget.Filter
+import android.widget.Filterable
+import android.widget.TextView
+import androidx.annotation.LayoutRes
+import androidx.core.graphics.convertTo
 import com.demo.userlistdemo.data.UserModel
-import kotlinx.android.synthetic.main.userlist.view.*
+import java.util.*
 
-class UserListAdapter(val activity: Activity): RecyclerView.Adapter<UserListAdapter.MyViewHolder>() {
+class UserListAdapter(context: Context, @LayoutRes private val layoutResource: Int, private val allEmps: List<UserModel>):
+    ArrayAdapter<UserModel>(context, layoutResource, allEmps),
+    Filterable {
+    private var mEmps: List<UserModel> = allEmps
 
-    private var userList: List<UserModel>? = null
-
-
-    fun setUserList(userList: List<UserModel>?) {
-        this.userList = userList
+    override fun getCount(): Int {
+        return mEmps.size
     }
 
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    ): UserListAdapter.MyViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.userlist, parent, false)
-
-        return MyViewHolder(view)
-    }
-
-    override fun onBindViewHolder(holder: UserListAdapter.MyViewHolder, position: Int) {
-        holder.bind(userList?.get(position)!!, activity)
-        val userList = userList?.get(position)
-        holder.name.text = userList?.login
-        holder.id.text = userList?.id.toString()
-        holder.resposUrl.text = userList?.type
+    override fun getItem(p0: Int):UserModel? {
+        return mEmps.get(p0)
 
     }
 
-    override fun getItemCount(): Int {
-        if(userList == null)return 0
-        else return userList?.size!!
+   /* override fun getItemId(p0: Int): Long {
 
+        return mEmps.get(p0).id.toLong()
+    }*/
+
+    override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
+        val view: TextView = convertView as TextView? ?: LayoutInflater.from(context)
+            .inflate(layoutResource, parent, false) as TextView
+        view.text = "${mEmps[position].login}  (${mEmps[position].id})"
+        return view
     }
 
-    class MyViewHolder(view : View): RecyclerView.ViewHolder(view){
+    override fun getFilter(): Filter {
+        return object : Filter() {
+            override fun publishResults(
+                charSequence: CharSequence?,
+                filterResults: Filter.FilterResults
+            ) {
+                mEmps = filterResults.values as List<UserModel>
+                notifyDataSetChanged()
+            }
 
+            override fun performFiltering(charSequence: CharSequence?): Filter.FilterResults {
+                val queryString = charSequence?.toString()?.toLowerCase()
 
-        var name = view.tvName
-        var id = view.tvId
-        var resposUrl = view.tvReposUrl
+                val filterResults = Filter.FilterResults()
+                filterResults.values = if (queryString == null || queryString.isEmpty())
+                    allEmps
+                else
+                    allEmps.filter {
+                        it.login?.contains(queryString) == true ||
+                                it.type?.contains(queryString) == true ||
+                                it.id?.contains(queryString) == true
 
+                    }
 
-        fun bind(data: UserModel, activity: Activity) {
-
-            name = itemView.findViewById(R.id.tvName)
-            id = itemView.findViewById(R.id.tvId)
-            resposUrl = itemView.findViewById(R.id.tvReposUrl)
+                return filterResults
+            }
 
         }
     }
+
 }

@@ -20,5 +20,14 @@
         <item>Perl</item>
         <item>Javascript</item>
         <item>Jquery</item>
+        <item>Bangle</item>
+        <item>English</item>
+        <item>Arabic</item>
+        <item>Spanish</item>
+        <item>Hindi</item>
+        <item>C++</item>
+        <item>C</item>
+        <item>Swift</item>
+
     </string-array>
 </resources>
